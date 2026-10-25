@@ -139,6 +139,16 @@
     .ranking-heading p { margin:0; color:var(--muted); font-size:12px; }
     .ranking-actions { display:flex; align-items:center; justify-content:flex-end; gap:9px; flex-wrap:wrap; }
     .ranking-update { color:var(--muted); font-size:11px; white-space:nowrap; }
+    .apuration-strip { display:grid; grid-template-columns:minmax(0,1.5fr) repeat(2,minmax(150px,.75fr)); gap:11px; margin:0 0 18px; }
+    .apuration-progress-card, .apuration-stat { min-width:0; border:1px solid #2b3d55; border-radius:14px; background:rgba(8,14,24,.58); padding:14px 15px; }
+    .apuration-progress-heading { display:flex; justify-content:space-between; align-items:baseline; gap:10px; color:#c4d2e5; font-size:11px; font-weight:800; }
+    .apuration-progress-heading strong { color:#fff; font-size:clamp(20px,2.4vw,28px); font-weight:950; font-variant-numeric:tabular-nums; }
+    .apuration-track { height:8px; border-radius:999px; margin:10px 0 8px; overflow:hidden; background:#26364c; }
+    .apuration-track span { display:block; width:0; height:100%; border-radius:inherit; background:linear-gradient(90deg,#4b9cff,#36d399); transition:width .55s ease; }
+    .apuration-progress-card small, .apuration-stat small { display:block; margin-top:5px; color:var(--subtle); font-size:10px; }
+    .apuration-stat { display:flex; flex-direction:column; justify-content:center; }
+    .apuration-stat span { color:var(--muted); font-size:11px; font-weight:800; }
+    .apuration-stat strong { display:block; margin-top:5px; font-size:clamp(20px,2.4vw,28px); font-weight:950; letter-spacing:-.04em; line-height:1.12; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
     .rank-list { display:grid; gap:12px; }
     .rank-row { display:grid; grid-template-columns:60px 80px minmax(0,1fr) minmax(140px,220px); align-items:center; gap:16px; min-height:124px; padding:15px 17px; border:1px solid #2f4057; border-radius:16px; background:rgba(9,15,25,.68); position:relative; overflow:hidden; }
     .rank-row::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--candidate); }
@@ -208,9 +218,9 @@
     body.focus-mode .ranking-heading h2 { font-size:clamp(28px,4vw,48px); }
     body.focus-mode .ranking-heading p { font-size:14px; }
     body.focus-mode .rank-list { flex:1; grid-template-columns:1fr 1fr; align-content:stretch; gap:20px; }
-    body.focus-mode .rank-row { grid-template-columns:clamp(48px,5vw,78px) clamp(80px,10vw,150px) minmax(0,1fr); grid-template-rows:auto auto; align-content:center; gap:14px; min-height:0; padding:clamp(16px,2.5vw,34px); }
+    body.focus-mode .rank-row { grid-template-columns:clamp(48px,5vw,78px) clamp(64px,7vw,100px) minmax(0,1fr); grid-template-rows:auto auto; align-content:center; gap:14px; min-height:0; padding:clamp(16px,2.5vw,34px); }
     body.focus-mode .rank-position { font-size:clamp(40px,5.5vw,72px); grid-row:1 / span 2; }
-    body.focus-mode .rank-photo-wrap { grid-row:1 / span 2; width:100%; height:clamp(150px,28vh,300px); }
+    body.focus-mode .rank-photo-wrap { grid-row:1 / span 2; width:100%; height:clamp(90px,12vh,135px); }
     body.focus-mode .rank-name { font-size:clamp(23px,3vw,42px); }
     body.focus-mode .rank-votes { font-size:clamp(24px,3.4vw,44px); }
     body.focus-mode .rank-pct { font-size:clamp(23px,2.7vw,38px); }
@@ -222,6 +232,8 @@
     @media (max-width: 900px) {
       .ranking-heading { align-items:flex-start; flex-direction:column; }
       .ranking-actions { justify-content:flex-start; }
+      .apuration-strip { grid-template-columns:1fr 1fr; }
+      .apuration-progress-card { grid-column:1 / -1; }
       .rank-row { grid-template-columns:48px 64px minmax(0,1fr) minmax(100px,150px); gap:11px; padding:13px; }
       .rank-photo-wrap { width:62px; height:76px; }
       .rank-position { font-size:28px; }
@@ -235,6 +247,9 @@
       .nav-right { gap:6px; }
       .nav-right .secondary-button { font-size:10px; padding:8px 9px; }
       .ranking-panel { padding:16px; }
+      .apuration-strip { grid-template-columns:1fr 1fr; gap:8px; }
+      .apuration-progress-card, .apuration-stat { padding:12px; }
+      .apuration-progress-heading strong, .apuration-stat strong { font-size:21px; }
       .ranking-actions { width:100%; }
       .ranking-update { flex:1 0 100%; }
       .rank-row { grid-template-columns:36px 52px minmax(0,1fr); gap:9px; padding:12px 10px; }
@@ -312,7 +327,7 @@
         <div><strong>RADAR ELEITORAL BRASIL</strong><small>Apuração presidencial · 2026</small></div>
       </div>
       <div class="nav-right">
-        <button class="secondary-button" id="open-map-button" type="button" aria-controls="state-drawer" aria-expanded="false">Mapa por estado</button>
+        <button class="secondary-button" id="open-map-button" type="button" aria-controls="state-drawer" aria-expanded="false">Mapa interativo</button>
         <a class="source-link" href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener noreferrer" aria-label="Abrir portal oficial do TSE">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><path d="M14 3h7v7M10 14 21 3"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
           Portal oficial do TSE
@@ -326,7 +341,7 @@
       <div>
         <span class="eyebrow"><span class="dot"></span> 2º turno · 25 de outubro de 2026</span>
         <h1 id="main-title">A eleição, em números.</h1>
-        <p class="intro">Acompanhe a totalização presidencial com os dados oficiais do Tribunal Superior Eleitoral. As cores dos cartões são apenas identificadores visuais, conforme a configuração deste painel.</p>
+        <p class="intro">Acompanhe a classificação nacional, o avanço da apuração e os resultados por estado com dados oficiais do Tribunal Superior Eleitoral.</p>
       </div>
       <div class="hero-note"><b>Fonte primária: TSE</b><br><span id="clock">Horário de Brasília: —</span><br><span id="last-update">Última consulta: ainda não realizada</span></div>
     </section>
@@ -344,41 +359,6 @@
       </div>
     </section>
 
-    <section class="candidates" aria-label="Comparativo dos candidatos à Presidência">
-      <article class="candidate lula">
-        <div class="portrait-wrap">
-          <span class="portrait-fallback" aria-hidden="true">L</span>
-          <img id="lula-photo" src="https://images.investmentofficer.com/cdn/ff/cB7uSbQRbg-kR5pb9JI9QLnYeFdz1pBxS-DwiehjVTA/1767966533/public/styles/large/public/2026-01/Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%28horizontal%29.jpg?itok=19muCPrZ" alt="Fotografia de Luiz Inácio Lula da Silva" referrerpolicy="no-referrer">
-          <span class="portrait-tag">PT · 13</span>
-        </div>
-        <div class="candidate-body">
-          <div class="cand-top"><div><h2>Lula</h2><div class="party">Luiz Inácio Lula da Silva</div></div><div class="number">13</div></div>
-          <div>
-            <div class="votes-label">Votos contabilizados</div>
-            <div class="votes empty-value" id="lula-votes">Aguardando</div>
-            <div class="candidate-progress"><span id="lula-progress"></span></div>
-            <div class="candidate-bottom"><div class="pct empty-value" id="lula-pct">—%</div><div class="vote-state" id="lula-state">Sem parcial oficial<br>disponível ainda</div></div>
-          </div>
-        </div>
-      </article>
-      <article class="candidate flavio">
-        <div class="portrait-wrap">
-          <span class="portrait-fallback" aria-hidden="true">F</span>
-          <img id="flavio-photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/2026_FLAVIO_BOLSONARO_CANDIDATO_PRESIDENTE_TSE_%28280002551544%29_%28cropped%29.jpg?width=500" alt="Fotografia de Flávio Bolsonaro" referrerpolicy="no-referrer">
-          <span class="portrait-tag">PL · 22</span>
-        </div>
-        <div class="candidate-body">
-          <div class="cand-top"><div><h2>Flávio Bolsonaro</h2><div class="party">Flávio Nantes Bolsonaro</div></div><div class="number">22</div></div>
-          <div>
-            <div class="votes-label">Votos contabilizados</div>
-            <div class="votes empty-value" id="flavio-votes">Aguardando</div>
-            <div class="candidate-progress"><span id="flavio-progress"></span></div>
-            <div class="candidate-bottom"><div class="pct empty-value" id="flavio-pct">—%</div><div class="vote-state" id="flavio-state">Sem parcial oficial<br>disponível ainda</div></div>
-          </div>
-        </div>
-      </article>
-    </section>
-
     <section class="ranking-panel" id="ranking-panel" aria-labelledby="ranking-title">
       <div class="ranking-heading">
         <div>
@@ -388,8 +368,25 @@
         </div>
         <div class="ranking-actions">
           <span class="ranking-update" id="ranking-update">Aguardando parcial do TSE</span>
-          <button class="secondary-button" id="ranking-map-button" type="button">Ver mapa do Brasil</button>
+          <button class="secondary-button" id="ranking-map-button" type="button">Abrir mapa interativo</button>
           <button id="fullscreen-button" type="button" aria-pressed="false">⛶ Tela cheia</button>
+        </div>
+      </div>
+      <div class="apuration-strip" aria-label="Resumo da apuração nacional">
+        <div class="apuration-progress-card">
+          <div class="apuration-progress-heading"><span>Progresso da apuração</span><strong class="empty-value" id="rank-sections-pct">—%</strong></div>
+          <div class="apuration-track"><span id="rank-sections-bar"></span></div>
+          <small>Percentual oficial de seções totalizadas</small>
+        </div>
+        <div class="apuration-stat">
+          <span>Seções totalizadas</span>
+          <strong class="empty-value" id="rank-sections-count">—</strong>
+          <small>Apuradas até agora</small>
+        </div>
+        <div class="apuration-stat">
+          <span>Total de seções</span>
+          <strong class="empty-value" id="rank-sections-total">—</strong>
+          <small>Previstas na totalização</small>
         </div>
       </div>
       <div class="rank-list" id="rank-list" aria-live="polite" aria-relevant="all">
@@ -427,7 +424,7 @@
     </section>
 
     <footer class="footer">
-      <p>Painel independente e sem vínculo com o TSE. Dados eleitorais: arquivos públicos do TSE. Fotos: retrato público de Lula; foto de candidatura 2026 de Flávio Bolsonaro (TSE via Wikimedia Commons). As fotografias podem depender de serviços externos. A divulgação oficial da apuração presidencial começa às 17h de Brasília, em 25/10/2026.</p>
+      <p>Painel independente e sem vínculo com o TSE. Dados eleitorais: arquivos públicos do TSE. As miniaturas dos candidatos no ranking podem depender de serviços externos. A divulgação oficial da apuração presidencial começa às 17h de Brasília, em 25/10/2026.</p>
       <div class="footer-links"><a href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener noreferrer">Apuração oficial</a><a href="https://www.tse.jus.br/eleicoes/informacoes-tecnicas-sobre-a-divulgacao-de-resultados" target="_blank" rel="noopener noreferrer">Documentação técnica TSE</a></div>
     </footer>
   </main>
@@ -453,6 +450,10 @@
     (() => {
       'use strict';
       const OFFICIAL_URL = 'https://resultados.tse.jus.br/oficial/ele2026/6258/dados/br/br-c0001-e006258-u.json';
+      const CANDIDATE_PHOTOS = {
+        lula: 'https://images.investmentofficer.com/cdn/ff/cB7uSbQRbg-kR5pb9JI9QLnYeFdz1pBxS-DwiehjVTA/1767966533/public/styles/large/public/2026-01/Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%28horizontal%29.jpg?itok=19muCPrZ',
+        flavio: 'https://commons.wikimedia.org/wiki/Special:FilePath/2026_FLAVIO_BOLSONARO_CANDIDATO_PRESIDENTE_TSE_%28280002551544%29_%28cropped%29.jpg?width=500'
+      };
       const RELEASE_STAMP = '2026-10-25 17:00';
       const REFRESH_MS = 30000;
       let refreshTimer = null;
@@ -591,8 +592,8 @@
       }
       function renderRanking(data) {
         const candidates = [
-          { key:'lula', name:'Lula', party:'PT · 13', votes:data ? data.lulaVotes : NaN, pct:data ? data.lulaPct : NaN, photo:$('lula-photo').src, color:'var(--red)' },
-          { key:'flavio', name:'Flávio Bolsonaro', party:'PL · 22', votes:data ? data.flavioVotes : NaN, pct:data ? data.flavioPct : NaN, photo:$('flavio-photo').src, color:'var(--blue)' }
+          { key:'lula', name:'Lula', party:'PT · 13', votes:data ? data.lulaVotes : NaN, pct:data ? data.lulaPct : NaN, photo:CANDIDATE_PHOTOS.lula, color:'var(--red)' },
+          { key:'flavio', name:'Flávio Bolsonaro', party:'PL · 22', votes:data ? data.flavioVotes : NaN, pct:data ? data.flavioPct : NaN, photo:CANDIDATE_PHOTOS.flavio, color:'var(--blue)' }
         ];
         const hasVotes = data && (safe(data.lulaVotes) + safe(data.flavioVotes) > 0);
         if (hasVotes) candidates.sort((a,b) => safe(b.votes) - safe(a.votes));
@@ -847,15 +848,6 @@
         const hasVotes = totalCandidateVotes > 0;
         const leader = data.lulaVotes > data.flavioVotes ? 'Lula à frente na parcial' : data.flavioVotes > data.lulaVotes ? 'Flávio à frente na parcial' : 'Empate na parcial';
 
-        setText('lula-votes', fmtInt(data.lulaVotes), true);
-        setText('flavio-votes', fmtInt(data.flavioVotes), true);
-        setText('lula-pct', fmtPct(data.lulaPct), true);
-        setText('flavio-pct', fmtPct(data.flavioPct), true);
-        $('lula-progress').style.width = `${Math.max(0, Math.min(100, safe(data.lulaPct)))}%`;
-        $('flavio-progress').style.width = `${Math.max(0, Math.min(100, safe(data.flavioPct)))}%`;
-        $('lula-state').innerHTML = hasVotes && data.lulaVotes > data.flavioVotes ? 'À frente na parcial<br>nacional' : 'Resultado parcial<br>nacional';
-        $('flavio-state').innerHTML = hasVotes && data.flavioVotes > data.lulaVotes ? 'À frente na parcial<br>nacional' : 'Resultado parcial<br>nacional';
-
         setText('metric-sections', Number.isFinite(data.sectionsCounted) ? fmtInt(data.sectionsCounted) : '—', Number.isFinite(data.sectionsCounted));
         setText('metric-sections-note', Number.isFinite(data.sectionsPct) ? `${fmtPct(data.sectionsPct)} do total` : 'Aguardando dados oficiais', Number.isFinite(data.sectionsPct));
         setText('metric-electorate', fmtInt(data.electorate), Number.isFinite(data.electorate));
@@ -872,6 +864,11 @@
         $('chart-lula-bar').style.width = `${Math.max(0, Math.min(100, safe(data.lulaPct)))}%`;
         $('chart-flavio-bar').style.width = `${Math.max(0, Math.min(100, safe(data.flavioPct)))}%`;
         $('comparison-note').innerHTML = hasVotes ? `<strong>${leader}.</strong> Diferença de ${fmtInt(difference)} votos e ${fmtPct(ppDifference)}. É uma parcial, não uma confirmação de vitória.` : '<strong>Primeira parcial ainda sem votos contabilizados.</strong> O painel continuará consultando o TSE automaticamente.';
+
+        setText('rank-sections-pct', fmtPct(data.sectionsPct), Number.isFinite(data.sectionsPct));
+        setText('rank-sections-count', fmtInt(data.sectionsCounted), Number.isFinite(data.sectionsCounted));
+        setText('rank-sections-total', fmtInt(data.sectionsTotal), Number.isFinite(data.sectionsTotal));
+        $('rank-sections-bar').style.width = `${Math.max(0, Math.min(100, safe(data.sectionsPct)))}%`;
 
         setText('sections-pct', fmtPct(data.sectionsPct), Number.isFinite(data.sectionsPct));
         setText('sections-count', `${fmtInt(data.sectionsCounted)} seções totalizadas`, Number.isFinite(data.sectionsCounted));
@@ -934,8 +931,6 @@
         }
       });
       document.addEventListener('visibilitychange', () => { if (!document.hidden) { refresh(); if($('state-drawer').getAttribute('aria-hidden')==='false') loadAllStateResults(); } });
-      $('lula-photo').addEventListener('error', () => { $('lula-photo').style.display = 'none'; });
-      $('flavio-photo').addEventListener('error', () => { $('flavio-photo').style.display = 'none'; });
       updateClock();
       setInterval(updateClock, 1000);
       showWaiting();
