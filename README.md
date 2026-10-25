@@ -1,29 +1,43 @@
 # Radar Eleitoral Brasil
 
-Painel web estático, responsivo, em português, para acompanhar a divulgação oficial da apuração presidencial.
+Painel estático, responsivo e em português para acompanhar a divulgação oficial da apuração presidencial do segundo turno das Eleições 2026.
+
+## O que inclui
+
+- Retratos dos dois candidatos em destaque, com Lula em vermelho e Flávio Bolsonaro em azul.
+- Painel estatístico com votos, percentuais, diferença entre candidatos, seções totalizadas, eleitorado, comparecimento, abstenções, votos brancos e nulos.
+- Gráficos comparativos que usam apenas números recebidos do arquivo oficial do TSE.
+- Consulta automática a cada 30 segundos enquanto a página estiver aberta e visível; botão para atualizar manualmente.
+- Antes das 17h de Brasília em 25/10/2026, a página mostra o aviso de espera. Depois, exige um carimbo de dados no horário de divulgação, para não apresentar o arquivo zerado anterior à apuração como resultado ao vivo.
+- Link para conferência direta no portal oficial do TSE e mensagens de erro em caso de falha de rede/CORS. Não há números simulados ou estimados.
 
 ## Arquivos
-- `index.html`: site completo (HTML, CSS e JavaScript em um único arquivo).
+
+- `index.html`: página completa, com CSS e JavaScript no próprio arquivo.
 - `README.md`: estas instruções.
 
 ## Publicar gratuitamente no GitHub Pages
-1. Entre em https://github.com e crie um repositório novo chamado `radar-eleitoral-brasil`.
-2. Marque o repositório como **Public** e crie-o sem README/licença adicionais (ou mantenha os arquivos que já houver).
-3. No repositório, use **Add file → Upload files**.
-4. Envie `index.html` e `README.md` deste pacote. O arquivo principal precisa se chamar exatamente `index.html`.
-5. Clique em **Commit changes**.
-6. Abra **Settings → Pages**.
-7. Em **Build and deployment**, selecione **Deploy from a branch**; escolha `main` e `/ (root)`; clique em **Save**.
-8. Aguarde a publicação. O endereço costuma ser `https://SEU-USUARIO.github.io/radar-eleitoral-brasil/`.
 
-## Importante sobre a integração TSE
-- O site consulta o JSON presidencial do segundo turno em `resultados.tse.jus.br`, usando a estrutura documentada para 2026. O código de eleição e o caminho de arquivo devem ser confirmados na configuração oficial do TSE no momento da apuração.
-- O navegador pode bloquear a consulta direta por política CORS ou a estrutura dos arquivos pode ser atualizada. Se isso ocorrer, o painel mostrará erro; não inventará nem simulará números.
-- Se o navegador bloquear a consulta direta, a solução confiável é adicionar um pequeno proxy/backend (por exemplo, Cloudflare Worker ou GitHub Actions). Isso requer configurar e testar esse componente; GitHub Pages sozinho não executa código servidor.
-- A interface usa botões de seleção por estado em vez de um mapa geográfico real nesta primeira versão. Os dados estaduais são consultados sob demanda. A lista de municípios não está implementada nesta versão.
-- Os números são dados públicos e podem mudar durante a totalização. O painel não é afiliado ao TSE; confirme sempre no portal oficial: https://resultados.tse.jus.br/
-- A atualização automática consulta a cada 30 segundos apenas enquanto a página estiver aberta e visível. O intervalo é conservador para reduzir requisições. Não significa que o TSE publique novos dados nesse ritmo.
-- Fotos externas podem não carregar se o provedor de imagens estiver indisponível; os identificadores numéricos permanecem como fallback visual.
+1. Crie um repositório público, por exemplo `radar-eleitoral-brasil`.
+2. Envie `index.html` e `README.md` para a raiz do repositório.
+3. No GitHub, abra **Settings → Pages**.
+4. Em **Build and deployment**, escolha **Deploy from a branch**, selecione `main` e `/ (root)`, e salve.
+5. Aguarde o GitHub publicar o site; o endereço costuma ser `https://SEU-USUARIO.github.io/radar-eleitoral-brasil/`.
 
-## Segurança e neutralidade
-O projeto não pede login, não coleta dados pessoais e não inclui tokens ou credenciais. As cores vermelho e azul são escolhas visuais para diferenciar os candidatos, não recomendações políticas.
+## Fonte oficial
+
+O painel consulta este arquivo público de resultado presidencial do segundo turno:
+
+`https://resultados.tse.jus.br/oficial/ele2026/6258/dados/br/br-c0001-e006258-u.json`
+
+Documentação técnica do TSE: https://www.tse.jus.br/eleicoes/informacoes-tecnicas-sobre-a-divulgacao-de-resultados
+
+Portal oficial de resultados: https://resultados.tse.jus.br/oficial/app/index.html
+
+## Importante
+
+- O painel é independente e não é afiliado ao TSE.
+- A divulgação oficial dos resultados presidenciais do segundo turno está prevista a partir das 17h de Brasília em 25 de outubro de 2026.
+- O GitHub Pages é estático e não executa um servidor próprio. Se o navegador bloquear o acesso direto ao arquivo do TSE por CORS, o painel avisará e oferecerá o link oficial; para garantir acesso em todos os navegadores será necessário um proxy/backend confiável.
+- As fotografias são carregadas de fontes externas e dependem da disponibilidade desses provedores.
+- A atualização de 30 segundos significa que o painel consulta esse intervalo; não significa que o TSE gere um novo arquivo a cada 30 segundos.
