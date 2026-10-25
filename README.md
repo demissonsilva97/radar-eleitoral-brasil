@@ -5,7 +5,7 @@ Painel estático, responsivo e em português para acompanhar a divulgação ofic
 ## O que inclui
 
 - Interface priorizada para classificação nacional, sem cartões com retratos em grande formato; o ranking mantém apenas miniaturas compactas. Lula aparece em vermelho e Flávio Bolsonaro em azul.
-- Ranking nacional dinâmico: as posições são reordenadas automaticamente pelo total de votos da parcial oficial. Acima do ranking, um resumo mostra percentual de apuração, seções totalizadas e total de seções.
+- Ranking nacional dinâmico: as posições são reordenadas automaticamente pelo total de votos da parcial oficial. O candidato que lidera recebe um cartão de destaque com foto maior e selo de líder; se a liderança mudar, o destaque acompanha automaticamente a nova liderança. Em caso de empate, ambos recebem ênfase equivalente. Acima do ranking, um resumo mostra percentual de apuração, seções totalizadas e total de seções.
 - Aba lateral com mapa interativo do Brasil. Ao abrir o mapa, a página consulta arquivos estaduais do TSE; estados com liderança válida ficam vermelhos ou azuis, e clicar em uma UF abre os votos, percentuais e a liderança estadual. Há também uma lista de siglas para facilitar a seleção de estados pequenos.
 - Modo telão/tela cheia para manter o ranking nacional em destaque; o modo visual também funciona caso o navegador não autorize a API de tela cheia.
 - Painel estatístico com votos, percentuais, diferença entre candidatos, seções totalizadas, eleitorado, comparecimento, abstenções, votos brancos e nulos.

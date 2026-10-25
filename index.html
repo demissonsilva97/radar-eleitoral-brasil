@@ -278,6 +278,84 @@
     }
     @media (prefers-reduced-motion: reduce) { .state-drawer { transition:none; } }
 
+    /* Destaque dinâmico: a foto maior acompanha a liderança da parcial. */
+    .rank-row.is-leader,
+    .rank-row.is-tied {
+      grid-template-columns:74px 118px minmax(0,1fr) minmax(150px,240px);
+      min-height:166px;
+      padding:18px 20px;
+      border-color:var(--candidate);
+      background:linear-gradient(100deg,var(--glow),rgba(9,15,25,.92) 58%);
+      box-shadow:0 14px 35px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.025);
+    }
+    .rank-row.is-leader::before { width:6px; }
+    .rank-row.is-leader .rank-position,
+    .rank-row.is-tied .rank-position { font-size:44px; }
+    .rank-row.is-leader .rank-photo-wrap,
+    .rank-row.is-tied .rank-photo-wrap { width:108px; height:132px; border-radius:16px; box-shadow:0 8px 26px var(--glow); }
+    .rank-row.is-leader .rank-name,
+    .rank-row.is-tied .rank-name { font-size:clamp(21px,2.25vw,29px); }
+    .rank-row.is-leader .rank-votes,
+    .rank-row.is-tied .rank-votes { font-size:clamp(24px,2.6vw,34px); }
+    .rank-row.is-leader .rank-pct,
+    .rank-row.is-tied .rank-pct { font-size:22px; }
+    .rank-leader-badge {
+      display:inline-flex; align-items:center; gap:6px; padding:5px 8px; border-radius:7px;
+      color:#fff; background:var(--candidate); font-size:9px; font-weight:950; letter-spacing:.08em;
+      box-shadow:0 5px 15px var(--glow); white-space:nowrap;
+    }
+    .rank-leader-badge::before { content:"★"; font-size:10px; }
+    .rank-leader-badge.tied { background:#596b83; }
+    .rank-row.leader-changed { animation:leader-card-arrive .72s ease-out; }
+    .rank-row.leader-changed .rank-photo-wrap { animation:leader-photo-grow .68s cubic-bezier(.2,.8,.2,1); }
+    @keyframes leader-card-arrive {
+      0% { transform:translateY(5px); box-shadow:0 0 0 rgba(0,0,0,0); }
+      100% { transform:translateY(0); box-shadow:0 14px 35px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.025); }
+    }
+    @keyframes leader-photo-grow {
+      0% { transform:scale(.86); opacity:.72; }
+      100% { transform:scale(1); opacity:1; }
+    }
+    @media (max-width:900px) {
+      .rank-row.is-leader,
+      .rank-row.is-tied { grid-template-columns:48px 88px minmax(0,1fr) minmax(100px,150px); min-height:148px; gap:11px; padding:14px; }
+      .rank-row.is-leader .rank-photo-wrap,
+      .rank-row.is-tied .rank-photo-wrap { width:84px; height:108px; }
+      .rank-row.is-leader .rank-position,
+      .rank-row.is-tied .rank-position { font-size:34px; }
+      body.focus-mode .rank-row.is-leader .rank-photo-wrap,
+      body.focus-mode .rank-row.is-tied .rank-photo-wrap { height:clamp(140px,18vh,195px); }
+    }
+    body.focus-mode .rank-row.is-leader,
+    body.focus-mode .rank-row.is-tied {
+      grid-template-columns:clamp(48px,5vw,78px) clamp(88px,10vw,126px) minmax(0,1fr);
+    }
+    body.focus-mode .rank-row.is-leader .rank-photo-wrap,
+    body.focus-mode .rank-row.is-tied .rank-photo-wrap { width:108px; height:clamp(130px,17vh,190px); }
+    @media (max-width:620px) {
+      .rank-row.is-leader,
+      .rank-row.is-tied { grid-template-columns:36px 66px minmax(0,1fr); gap:9px; padding:12px 10px; min-height:0; }
+      .rank-row.is-leader .rank-photo-wrap,
+      .rank-row.is-tied .rank-photo-wrap { width:64px; height:88px; border-radius:11px; }
+      .rank-row.is-leader .rank-position,
+      .rank-row.is-tied .rank-position { font-size:28px; }
+      .rank-row.is-leader .rank-name,
+      .rank-row.is-tied .rank-name { font-size:18px; }
+      .rank-row.is-leader .rank-votes,
+      .rank-row.is-tied .rank-votes { font-size:21px; }
+      .rank-row.is-leader .rank-pct,
+      .rank-row.is-tied .rank-pct { font-size:17px; }
+      .rank-leader-badge { font-size:8px; padding:4px 6px; }
+      body.focus-mode .rank-row.is-leader,
+      body.focus-mode .rank-row.is-tied { grid-template-columns:34px 66px minmax(0,1fr); }
+      body.focus-mode .rank-row.is-leader .rank-photo-wrap,
+      body.focus-mode .rank-row.is-tied .rank-photo-wrap { width:64px; height:90px; grid-row:1 / span 2; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .rank-row.leader-changed,
+      .rank-row.leader-changed .rank-photo-wrap { animation:none !important; }
+    }
+
     @media (max-width: 900px) {
       .candidate { grid-template-columns:31% 1fr; }
       .candidate-body { padding:17px; }
@@ -590,6 +668,7 @@
       function showError(message) {
         setStatus('error', 'Não foi possível ler a fonte diretamente', `${message} Acesse o portal oficial do TSE ou tente novamente; o painel não exibirá números inventados.`, 'Conexão pendente');
       }
+      let previousRankingLeader = null;
       function renderRanking(data) {
         const candidates = [
           { key:'lula', name:'Lula', party:'PT · 13', votes:data ? data.lulaVotes : NaN, pct:data ? data.lulaPct : NaN, photo:CANDIDATE_PHOTOS.lula, color:'var(--red)' },
@@ -598,6 +677,8 @@
         const hasVotes = data && (safe(data.lulaVotes) + safe(data.flavioVotes) > 0);
         if (hasVotes) candidates.sort((a,b) => safe(b.votes) - safe(a.votes));
         const tied = hasVotes && safe(candidates[0].votes) === safe(candidates[1].votes);
+        const leaderKey = !hasVotes ? null : tied ? 'tie' : candidates[0].key;
+        const leaderChanged = !!(leaderKey && previousRankingLeader && leaderKey !== previousRankingLeader);
         const list = $('rank-list');
         list.innerHTML = candidates.map((c, index) => {
           const position = !hasVotes ? '—' : tied ? '1º' : `${index+1}º`;
@@ -605,13 +686,16 @@
           const pctText = Number.isFinite(c.pct) ? fmtPct(c.pct) : '—%';
           const votesText = Number.isFinite(c.votes) ? fmtInt(c.votes) : 'Aguardando';
           const pctWidth = Math.max(0, Math.min(100, safe(c.pct)));
-          return `<article class="rank-row ${c.key}" aria-label="${position} ${c.name}, ${votesText} votos, ${pctText}">
+          const emphasisClass = !hasVotes ? '' : tied ? ' is-tied' : index === 0 ? ` is-leader${leaderChanged ? ' leader-changed' : ''}` : '';
+          const leaderBadge = !hasVotes ? '' : tied ? '<span class="rank-leader-badge tied">EMPATE NA LIDERANÇA</span>' : index === 0 ? '<span class="rank-leader-badge">LÍDER DA PARCIAL</span>' : '';
+          return `<article class="rank-row ${c.key}${emphasisClass}" aria-label="${position} ${c.name}, ${votesText} votos, ${pctText}${index === 0 && hasVotes && !tied ? ', líder da parcial' : tied ? ', empate na liderança' : ''}">
             <div class="rank-position">${position}</div>
             <div class="rank-photo-wrap"><img class="rank-photo" src="${c.photo}" alt="Foto de ${c.name}" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'"></div>
-            <div class="rank-main"><div class="rank-name-line"><span class="rank-name">${c.name}</span><span class="rank-party">${c.party}</span></div><div class="rank-status">${status}</div><div class="rank-track"><span style="width:${pctWidth}%"></span></div></div>
+            <div class="rank-main"><div class="rank-name-line"><span class="rank-name">${c.name}</span><span class="rank-party">${c.party}</span>${leaderBadge}</div><div class="rank-status">${status}</div><div class="rank-track"><span style="width:${pctWidth}%"></span></div></div>
             <div class="rank-numbers"><div class="rank-votes">${votesText}</div><div class="rank-pct">${pctText}</div></div>
           </article>`;
         }).join('');
+        if (hasVotes) previousRankingLeader = leaderKey;
         $('ranking-update').textContent = hasVotes ? `Parcial recebida · ${data.time || 'horário não informado'}` : 'Aguardando parcial do TSE';
         $('ranking-subtitle').textContent = hasVotes ? 'Posições reordenadas automaticamente pelo total de votos oficiais.' : 'A classificação só será definida quando houver votos oficiais disponíveis.';
       }
