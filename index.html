@@ -130,6 +130,139 @@
     .footer-links { display:flex; flex-wrap:wrap; gap:13px; align-content:flex-start; justify-content:flex-end; }
     .empty-value { color:#718198 !important; }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .secondary-button { background:#1a273b; border:1px solid #35465f; color:#ecf3fc; }
+    .secondary-button:hover { background:#24344c; }
+    .ranking-panel { margin:22px 0 30px; padding:24px; border:1px solid #35465f; border-radius:22px; background:linear-gradient(135deg,rgba(23,35,54,.97),rgba(11,18,31,.98)); box-shadow:0 18px 50px rgba(0,0,0,.18); }
+    .ranking-heading { display:flex; justify-content:space-between; align-items:flex-end; gap:18px; margin-bottom:18px; }
+    .ranking-kicker { display:block; color:#91b7e6; font-size:10px; font-weight:900; letter-spacing:.16em; }
+    .ranking-heading h2 { margin:5px 0 3px; font-size:clamp(23px,2.6vw,31px); letter-spacing:-.04em; }
+    .ranking-heading p { margin:0; color:var(--muted); font-size:12px; }
+    .ranking-actions { display:flex; align-items:center; justify-content:flex-end; gap:9px; flex-wrap:wrap; }
+    .ranking-update { color:var(--muted); font-size:11px; white-space:nowrap; }
+    .rank-list { display:grid; gap:12px; }
+    .rank-row { display:grid; grid-template-columns:60px 80px minmax(0,1fr) minmax(140px,220px); align-items:center; gap:16px; min-height:124px; padding:15px 17px; border:1px solid #2f4057; border-radius:16px; background:rgba(9,15,25,.68); position:relative; overflow:hidden; }
+    .rank-row::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--candidate); }
+    .rank-row.lula { --candidate:var(--red); }
+    .rank-row.flavio { --candidate:var(--blue); }
+    .rank-position { font-size:34px; line-height:1; font-weight:950; color:var(--candidate); text-align:center; font-variant-numeric:tabular-nums; }
+    .rank-photo-wrap { width:78px; height:91px; border-radius:12px; overflow:hidden; background:var(--glow, #1a273b); position:relative; }
+    .rank-row.lula { --glow:rgba(240,68,82,.14); }
+    .rank-row.flavio { --glow:rgba(75,156,255,.14); }
+    .rank-photo { width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; }
+    .rank-main { min-width:0; }
+    .rank-name-line { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .rank-name { font-size:clamp(18px,2vw,25px); font-weight:900; letter-spacing:-.03em; }
+    .rank-party { font-size:10px; font-weight:900; color:#dce8f8; border:1px solid #3a4a61; background:#1a273b; padding:4px 7px; border-radius:7px; }
+    .rank-status { color:var(--muted); font-size:11px; margin-top:4px; }
+    .rank-track { height:7px; border-radius:999px; overflow:hidden; background:#26344a; margin-top:13px; }
+    .rank-track span { display:block; height:100%; width:0; border-radius:inherit; background:var(--candidate); transition:width .6s ease; }
+    .rank-numbers { text-align:right; min-width:0; }
+    .rank-votes { font-size:clamp(20px,2.3vw,30px); font-weight:950; letter-spacing:-.04em; line-height:1.12; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+    .rank-pct { color:var(--candidate); font-size:19px; font-weight:950; margin-top:5px; font-variant-numeric:tabular-nums; }
+    .rank-empty { color:var(--muted); padding:24px 18px; text-align:center; border:1px dashed #35465f; border-radius:14px; font-size:13px; }
+    .ranking-footnote { display:flex; align-items:center; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:10px; margin-top:16px; }
+    .ranking-footnote .legend-dot { display:inline-block; }
+    .ranking-footnote-note { margin-left:auto; }
+    .drawer-backdrop { position:fixed; inset:0; z-index:100; background:rgba(1,5,12,.72); backdrop-filter:blur(5px); }
+    .state-drawer { position:fixed; z-index:101; inset:0 0 0 auto; width:min(560px,100%); height:100dvh; overflow-y:auto; padding:22px; background:#0c1422; border-left:1px solid #36475f; box-shadow:-20px 0 60px rgba(0,0,0,.38); transform:translateX(102%); visibility:hidden; transition:transform .25s ease,visibility .25s; }
+    .state-drawer.open { transform:translateX(0); visibility:visible; }
+    .drawer-header { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; }
+    .drawer-header h2 { margin:6px 0 4px; font-size:22px; letter-spacing:-.035em; }
+    .drawer-header p { margin:0; color:var(--muted); font-size:12px; }
+    .drawer-close { background:#1c2a3d; border:1px solid #394b64; color:#fff; width:38px; height:38px; padding:0; flex:0 0 auto; font-size:17px; }
+    .map-legend { display:flex; flex-wrap:wrap; gap:12px; margin:18px 0 8px; color:#c0cde0; font-size:10px; }
+    .map-legend span { display:inline-flex; align-items:center; gap:6px; }
+    .map-status { color:var(--muted); font-size:11px; margin:8px 0 12px; min-height:17px; }
+    .map-canvas { width:100%; min-height:270px; display:grid; place-items:center; border:1px solid #27384e; border-radius:16px; background:radial-gradient(ellipse at center,#142238,#0b1320 72%); overflow:hidden; }
+    .map-canvas svg { display:block; width:100%; max-height:450px; height:auto; padding:8px; }
+    .state-shape { fill:#3a4a60; stroke:#0b1320; stroke-width:1.5; stroke-linejoin:round; cursor:pointer; transition:fill .2s,filter .2s; outline:none; }
+    .state-shape:hover,.state-shape:focus { filter:brightness(1.35); stroke:#f1f6ff; stroke-width:2.5; }
+    .state-shape.leader-lula { fill:var(--red); }
+    .state-shape.leader-flavio { fill:var(--blue); }
+    .state-shape.selected { stroke:#fff; stroke-width:3; filter:drop-shadow(0 0 5px rgba(255,255,255,.45)); }
+    .map-loading { padding:32px 18px; color:var(--muted); text-align:center; font-size:12px; }
+    .state-list { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:5px; margin-top:9px; }
+    .state-chip { border:1px solid #35465c; background:#172438; color:#dbe7f7; border-radius:7px; padding:6px 3px; font-size:10px; font-weight:850; }
+    .state-chip.leader-lula { background:rgba(240,68,82,.18); border-color:rgba(240,68,82,.7); }
+    .state-chip.leader-flavio { background:rgba(75,156,255,.18); border-color:rgba(75,156,255,.7); }
+    .state-chip.selected { outline:2px solid #fff; outline-offset:1px; }
+    .map-summary { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; color:var(--muted); font-size:10px; margin:10px 2px 16px; }
+    .state-detail { border:1px solid #2d3e55; background:#111d2f; border-radius:16px; padding:16px; min-height:140px; }
+    .state-detail h3 { margin:0; font-size:18px; }
+    .state-detail-sub { color:var(--muted); font-size:11px; margin:4px 0 14px; }
+    .state-detail-placeholder { display:flex; flex-direction:column; gap:6px; color:var(--muted); font-size:11px; }
+    .state-detail-placeholder strong { color:#eaf2fc; font-size:14px; }
+    .state-leader { display:flex; gap:9px; align-items:center; margin:8px 0 12px; font-size:12px; font-weight:850; }
+    .state-leader .leader-chip { display:inline-grid; place-items:center; width:28px; height:28px; border-radius:9px; background:var(--chip); color:white; }
+    .state-candidate-row { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:8px; padding:10px 0; border-top:1px solid rgba(154,169,189,.13); }
+    .state-candidate-row .state-cand-label { font-size:11px; font-weight:800; }
+    .state-candidate-row .state-cand-count { font-weight:900; text-align:right; font-size:12px; font-variant-numeric:tabular-nums; }
+    .state-candidate-row .state-cand-pct { color:var(--muted); font-size:10px; grid-column:1 / -1; margin-top:-6px; }
+    .drawer-footnote { color:var(--subtle); font-size:10px; line-height:1.5; margin:13px 2px 0; }
+    body.focus-mode { overflow:hidden; }
+    body.focus-mode header { display:none; }
+    body.focus-mode main.wrap { width:100%; max-width:none; height:100dvh; min-height:100vh; margin:0; padding:18px clamp(14px,3vw,44px); overflow:auto; }
+    body.focus-mode main.wrap > *:not(#ranking-panel) { display:none !important; }
+    body.focus-mode .ranking-panel { margin:0; min-height:calc(100dvh - 36px); display:flex; flex-direction:column; justify-content:space-between; padding:clamp(16px,2.5vw,36px); }
+    body.focus-mode .ranking-heading { align-items:center; margin-bottom:20px; }
+    body.focus-mode .ranking-heading h2 { font-size:clamp(28px,4vw,48px); }
+    body.focus-mode .ranking-heading p { font-size:14px; }
+    body.focus-mode .rank-list { flex:1; grid-template-columns:1fr 1fr; align-content:stretch; gap:20px; }
+    body.focus-mode .rank-row { grid-template-columns:clamp(48px,5vw,78px) clamp(80px,10vw,150px) minmax(0,1fr); grid-template-rows:auto auto; align-content:center; gap:14px; min-height:0; padding:clamp(16px,2.5vw,34px); }
+    body.focus-mode .rank-position { font-size:clamp(40px,5.5vw,72px); grid-row:1 / span 2; }
+    body.focus-mode .rank-photo-wrap { grid-row:1 / span 2; width:100%; height:clamp(150px,28vh,300px); }
+    body.focus-mode .rank-name { font-size:clamp(23px,3vw,42px); }
+    body.focus-mode .rank-votes { font-size:clamp(24px,3.4vw,44px); }
+    body.focus-mode .rank-pct { font-size:clamp(23px,2.7vw,38px); }
+    body.focus-mode .rank-numbers { text-align:left; grid-column:3; }
+    body.focus-mode .rank-main { align-self:end; }
+    body.focus-mode .rank-track { height:12px; }
+    body.focus-mode .rank-status { font-size:13px; }
+    body.focus-mode .ranking-footnote { font-size:12px; }
+    @media (max-width: 900px) {
+      .ranking-heading { align-items:flex-start; flex-direction:column; }
+      .ranking-actions { justify-content:flex-start; }
+      .rank-row { grid-template-columns:48px 64px minmax(0,1fr) minmax(100px,150px); gap:11px; padding:13px; }
+      .rank-photo-wrap { width:62px; height:76px; }
+      .rank-position { font-size:28px; }
+      .rank-votes { font-size:20px; }
+      .rank-pct { font-size:17px; }
+      body.focus-mode .rank-list { grid-template-columns:1fr; }
+      body.focus-mode .rank-row { min-height:0; }
+      body.focus-mode .rank-photo-wrap { height:clamp(120px,22vh,230px); }
+    }
+    @media (max-width: 620px) {
+      .nav-right { gap:6px; }
+      .nav-right .secondary-button { font-size:10px; padding:8px 9px; }
+      .ranking-panel { padding:16px; }
+      .ranking-actions { width:100%; }
+      .ranking-update { flex:1 0 100%; }
+      .rank-row { grid-template-columns:36px 52px minmax(0,1fr); gap:9px; padding:12px 10px; }
+      .rank-position { font-size:24px; }
+      .rank-photo-wrap { width:50px; height:65px; }
+      .rank-name { font-size:16px; }
+      .rank-numbers { grid-column:3; text-align:left; display:flex; align-items:baseline; gap:9px; flex-wrap:wrap; }
+      .rank-votes { font-size:21px; }
+      .rank-pct { font-size:17px; margin-top:0; }
+      .ranking-footnote-note { margin-left:0; flex-basis:100%; }
+      .state-drawer { padding:16px; }
+      .map-canvas { min-height:210px; }
+      body.focus-mode main.wrap { padding:8px; }
+      body.focus-mode .ranking-panel { padding:14px; min-height:calc(100dvh - 16px); }
+      body.focus-mode .ranking-heading { gap:12px; }
+      body.focus-mode .ranking-heading p { font-size:11px; }
+      body.focus-mode .ranking-actions { gap:6px; }
+      body.focus-mode .ranking-actions button { padding:8px 10px; }
+      body.focus-mode .rank-row { grid-template-columns:34px 54px minmax(0,1fr); gap:8px; padding:10px; }
+      body.focus-mode .rank-position { font-size:25px; }
+      body.focus-mode .rank-photo-wrap { width:54px; height:76px; grid-row:1 / span 2; }
+      body.focus-mode .rank-main { grid-column:3; }
+      body.focus-mode .rank-numbers { grid-column:3; text-align:left; display:flex; align-items:baseline; gap:8px; }
+      body.focus-mode .rank-votes { font-size:clamp(17px,5vw,24px); }
+      body.focus-mode .rank-pct { font-size:16px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .state-drawer { transition:none; } }
+
     @media (max-width: 900px) {
       .candidate { grid-template-columns:31% 1fr; }
       .candidate-body { padding:17px; }
@@ -179,6 +312,7 @@
         <div><strong>RADAR ELEITORAL BRASIL</strong><small>Apuração presidencial · 2026</small></div>
       </div>
       <div class="nav-right">
+        <button class="secondary-button" id="open-map-button" type="button" aria-controls="state-drawer" aria-expanded="false">Mapa por estado</button>
         <a class="source-link" href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener noreferrer" aria-label="Abrir portal oficial do TSE">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><path d="M14 3h7v7M10 14 21 3"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
           Portal oficial do TSE
@@ -245,6 +379,25 @@
       </article>
     </section>
 
+    <section class="ranking-panel" id="ranking-panel" aria-labelledby="ranking-title">
+      <div class="ranking-heading">
+        <div>
+          <span class="ranking-kicker">CLASSIFICAÇÃO NACIONAL</span>
+          <h2 id="ranking-title">Ranking ao vivo</h2>
+          <p id="ranking-subtitle">A posição é ordenada automaticamente pelo total de votos da parcial oficial.</p>
+        </div>
+        <div class="ranking-actions">
+          <span class="ranking-update" id="ranking-update">Aguardando parcial do TSE</span>
+          <button class="secondary-button" id="ranking-map-button" type="button">Ver mapa do Brasil</button>
+          <button id="fullscreen-button" type="button" aria-pressed="false">⛶ Tela cheia</button>
+        </div>
+      </div>
+      <div class="rank-list" id="rank-list" aria-live="polite" aria-relevant="all">
+        <div class="rank-empty">O ranking será ordenado assim que houver votos oficiais disponíveis.</div>
+      </div>
+      <div class="ranking-footnote"><span class="legend-dot" style="--dot:var(--red)"></span> Lula · vermelho <span class="legend-dot" style="--dot:var(--blue)"></span> Flávio Bolsonaro · azul <span class="ranking-footnote-note">A liderança é parcial e pode mudar.</span></div>
+    </section>
+
     <div class="section-title"><div><h2>Painel estatístico</h2><p>Indicadores nacionais da eleição presidencial · 2º turno</p></div><small id="source-stamp">Arquivo oficial: aguardando liberação</small></div>
     <section class="metrics" aria-label="Indicadores principais da apuração">
       <article class="metric"><div class="metric-head"><span class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h17"/><path d="m7 15 4-5 3 2 5-7"/></svg></span>Seções totalizadas</div><strong class="empty-value" id="metric-sections">—</strong><small id="metric-sections-note">Aguardando dados oficiais</small></article>
@@ -279,6 +432,23 @@
     </footer>
   </main>
 
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="state-drawer" id="state-drawer" aria-labelledby="drawer-title" aria-hidden="true" inert>
+    <div class="drawer-header">
+      <div><span class="ranking-kicker">RESULTADOS POR UF</span><h2 id="drawer-title">Mapa eleitoral do Brasil</h2><p>Clique em um estado para ver a parcial oficial.</p></div>
+      <button class="drawer-close" id="close-map-button" type="button" aria-label="Fechar mapa">✕</button>
+    </div>
+    <div class="map-legend"><span><i class="legend-dot" style="--dot:var(--red)"></i> Lula lidera</span><span><i class="legend-dot" style="--dot:var(--blue)"></i> Flávio lidera</span><span><i class="legend-dot" style="--dot:#3a4a60"></i> Sem parcial</span></div>
+    <div class="map-status" id="map-status" aria-live="polite">Preparando mapa estadual…</div>
+    <div class="map-canvas" id="map-canvas"><div class="map-loading">Carregando o mapa do Brasil…</div></div>
+    <div class="state-list" id="state-list" aria-label="Selecionar estado"></div>
+    <div class="map-summary" id="map-summary"><span>Estados com parcial: —</span><span>Atualização estadual sob demanda</span></div>
+    <section class="state-detail" id="state-detail" aria-live="polite">
+      <div class="state-detail-placeholder"><strong>Selecione um estado</strong><span>A votação e a liderança estadual aparecerão aqui quando os dados oficiais estiverem disponíveis.</span></div>
+    </section>
+    <p class="drawer-footnote">Dados estaduais consultados individualmente na fonte pública do TSE. Estados sem resposta válida ficam neutros; não são feitas estimativas.</p>
+  </aside>
+
   <script>
     (() => {
       'use strict';
@@ -288,6 +458,24 @@
       let refreshTimer = null;
       let requestInFlight = false;
       let lastData = null;
+      let mapGeoJSON = null;
+      let mapLoadPromise = null;
+      let stateRefreshTimer = null;
+      let stateRefreshInFlight = false;
+      let selectedUF = null;
+      const stateData = Object.create(null);
+      const stateErrors = Object.create(null);
+      const STATE_GEOJSON_URL = 'https://cdn.jsdelivr.net/gh/henriquemalvar/br-geojson@main/dist/estados.geojson';
+      // Optional: put your deployed read-only Cloudflare Worker URL here if direct browser requests are blocked by CORS.
+      const TSE_PROXY_BASE = '';
+      const STATE_NAMES = {
+        AC:'Acre', AL:'Alagoas', AP:'Amapá', AM:'Amazonas', BA:'Bahia', CE:'Ceará', DF:'Distrito Federal',
+        ES:'Espírito Santo', GO:'Goiás', MA:'Maranhão', MT:'Mato Grosso', MS:'Mato Grosso do Sul',
+        MG:'Minas Gerais', PA:'Pará', PB:'Paraíba', PR:'Paraná', PE:'Pernambuco', PI:'Piauí',
+        RJ:'Rio de Janeiro', RN:'Rio Grande do Norte', RS:'Rio Grande do Sul', RO:'Rondônia', RR:'Roraima',
+        SC:'Santa Catarina', SP:'São Paulo', SE:'Sergipe', TO:'Tocantins'
+      };
+      const STATE_UFS = Object.keys(STATE_NAMES);
 
       const $ = (id) => document.getElementById(id);
       const fmtInt = (v) => Number.isFinite(v) ? new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 }).format(v) : '—';
@@ -306,6 +494,10 @@
         el.classList.toggle('empty-value', !dataReady);
       };
       const safe = (value) => Number.isFinite(value) ? value : 0;
+      async function fetchPublicJSON(url, options = {}) {
+        const target = TSE_PROXY_BASE.trim() ? `${TSE_PROXY_BASE.trim()}?url=${encodeURIComponent(url)}` : url;
+        return fetch(target, options);
+      }
 
       function brNowParts() {
         const parts = new Intl.DateTimeFormat('en-CA', {
@@ -397,7 +589,257 @@
       function showError(message) {
         setStatus('error', 'Não foi possível ler a fonte diretamente', `${message} Acesse o portal oficial do TSE ou tente novamente; o painel não exibirá números inventados.`, 'Conexão pendente');
       }
+      function renderRanking(data) {
+        const candidates = [
+          { key:'lula', name:'Lula', party:'PT · 13', votes:data ? data.lulaVotes : NaN, pct:data ? data.lulaPct : NaN, photo:$('lula-photo').src, color:'var(--red)' },
+          { key:'flavio', name:'Flávio Bolsonaro', party:'PL · 22', votes:data ? data.flavioVotes : NaN, pct:data ? data.flavioPct : NaN, photo:$('flavio-photo').src, color:'var(--blue)' }
+        ];
+        const hasVotes = data && (safe(data.lulaVotes) + safe(data.flavioVotes) > 0);
+        if (hasVotes) candidates.sort((a,b) => safe(b.votes) - safe(a.votes));
+        const tied = hasVotes && safe(candidates[0].votes) === safe(candidates[1].votes);
+        const list = $('rank-list');
+        list.innerHTML = candidates.map((c, index) => {
+          const position = !hasVotes ? '—' : tied ? '1º' : `${index+1}º`;
+          const status = !hasVotes ? 'Aguardando uma parcial oficial' : tied ? 'Empate na parcial nacional' : index === 0 ? 'À frente na parcial nacional' : '2º lugar na parcial nacional';
+          const pctText = Number.isFinite(c.pct) ? fmtPct(c.pct) : '—%';
+          const votesText = Number.isFinite(c.votes) ? fmtInt(c.votes) : 'Aguardando';
+          const pctWidth = Math.max(0, Math.min(100, safe(c.pct)));
+          return `<article class="rank-row ${c.key}" aria-label="${position} ${c.name}, ${votesText} votos, ${pctText}">
+            <div class="rank-position">${position}</div>
+            <div class="rank-photo-wrap"><img class="rank-photo" src="${c.photo}" alt="Foto de ${c.name}" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'"></div>
+            <div class="rank-main"><div class="rank-name-line"><span class="rank-name">${c.name}</span><span class="rank-party">${c.party}</span></div><div class="rank-status">${status}</div><div class="rank-track"><span style="width:${pctWidth}%"></span></div></div>
+            <div class="rank-numbers"><div class="rank-votes">${votesText}</div><div class="rank-pct">${pctText}</div></div>
+          </article>`;
+        }).join('');
+        $('ranking-update').textContent = hasVotes ? `Parcial recebida · ${data.time || 'horário não informado'}` : 'Aguardando parcial do TSE';
+        $('ranking-subtitle').textContent = hasVotes ? 'Posições reordenadas automaticamente pelo total de votos oficiais.' : 'A classificação só será definida quando houver votos oficiais disponíveis.';
+      }
+
+      function stateResultURL(uf) {
+        const code = uf.toLowerCase();
+        return `https://resultados.tse.jus.br/oficial/ele2026/6258/dados/${code}/${code}-c0001-e006258-u.json`;
+      }
+      function winnerFor(data) {
+        if (!data) return null;
+        if (safe(data.lulaVotes) + safe(data.flavioVotes) <= 0) return null;
+        if (data.lulaVotes > data.flavioVotes) return 'lula';
+        if (data.flavioVotes > data.lulaVotes) return 'flavio';
+        return 'tie';
+      }
+      function geoStateCode(feature) {
+        const props = feature.properties || {};
+        const candidates = [props.sigla, props.uf, props.UF, feature.id, props['hc-key']];
+        for (const value of candidates) {
+          if (!value) continue;
+          const val = String(value).toUpperCase().replace(/^BR-/, '').trim();
+          if (STATE_NAMES[val]) return val;
+        }
+        const name = String(props.nome || props.name || '').toLocaleLowerCase('pt-BR');
+        return Object.keys(STATE_NAMES).find(uf => STATE_NAMES[uf].toLocaleLowerCase('pt-BR') === name) || null;
+      }
+      function projectMapCoordinates(features) {
+        let minLon=Infinity, maxLon=-Infinity, minLat=Infinity, maxLat=-Infinity;
+        const scan = (coords) => {
+          if (!Array.isArray(coords)) return;
+          if (coords.length >= 2 && Number.isFinite(coords[0]) && Number.isFinite(coords[1])) {
+            minLon=Math.min(minLon,coords[0]); maxLon=Math.max(maxLon,coords[0]);
+            minLat=Math.min(minLat,coords[1]); maxLat=Math.max(maxLat,coords[1]);
+            return;
+          }
+          coords.forEach(scan);
+        };
+        features.forEach(f => scan(f.geometry && f.geometry.coordinates));
+        const width=620, height=620, pad=22;
+        const lonScale=(width-pad*2)/(maxLon-minLon), latScale=(height-pad*2)/(maxLat-minLat);
+        const scale=Math.min(lonScale,latScale);
+        const drawnWidth=(maxLon-minLon)*scale, drawnHeight=(maxLat-minLat)*scale;
+        const offX=(width-drawnWidth)/2, offY=(height-drawnHeight)/2;
+        const project = ([lon,lat]) => [offX+(lon-minLon)*scale, offY+(maxLat-lat)*scale];
+        return {project,width,height};
+      }
+      function polygonPath(geometry, project) {
+        const polygons = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
+        return polygons.map(poly => poly.map(ring => ring.map((point,i) => {
+          const [x,y] = project(point);
+          return `${i===0?'M':'L'}${x.toFixed(2)},${y.toFixed(2)}`;
+        }).join(' ') + ' Z').join(' ')).join(' ');
+      }
+      function renderStateChipList() {
+        $('state-list').innerHTML = STATE_UFS.slice().sort().map(uf => `<button class="state-chip" type="button" data-uf="${uf}" aria-label="Ver resultados de ${STATE_NAMES[uf]}">${uf}</button>`).join('');
+        $('state-list').querySelectorAll('.state-chip').forEach(button => button.addEventListener('click', () => selectState(button.getAttribute('data-uf'))));
+        updateMapStateColors();
+      }
+      async function loadStateMap() {
+        if (mapGeoJSON) { drawStateMap(); return; }
+        if (mapLoadPromise) return mapLoadPromise;
+        mapLoadPromise = (async () => {
+          $('map-status').textContent = 'Carregando geometria dos estados…';
+          try {
+            const response = await fetchPublicJSON(STATE_GEOJSON_URL, {cache:'force-cache', headers:{'Accept':'application/geo+json, application/json'}});
+            if (!response.ok) throw new Error(`Servidor do mapa respondeu HTTP ${response.status}`);
+            const json = await response.json();
+            if (!json || !Array.isArray(json.features) || !json.features.length) throw new Error('Arquivo geográfico sem estados válidos.');
+            mapGeoJSON = json;
+            drawStateMap();
+            $('map-status').textContent = 'Mapa carregado. Consultando as parciais estaduais oficiais…';
+          } catch (error) {
+            $('map-canvas').innerHTML = '<div class="map-loading">Não foi possível carregar o contorno geográfico. Confira sua conexão e tente abrir o mapa novamente.</div>';
+            $('map-status').textContent = `${error.message || 'Falha ao carregar o mapa.'} Você ainda pode selecionar uma UF na lista abaixo.`;
+            renderStateChipList();
+            throw error;
+          } finally { mapLoadPromise = null; }
+        })();
+        return mapLoadPromise;
+      }
+      function drawStateMap() {
+        if (!mapGeoJSON) return;
+        const features = mapGeoJSON.features.filter(f => geoStateCode(f) && f.geometry);
+        const {project,width,height} = projectMapCoordinates(features);
+        const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+        svg.setAttribute('role','group'); svg.setAttribute('aria-label','Mapa interativo dos estados brasileiros');
+        for (const feature of features) {
+          const uf = geoStateCode(feature); if (!uf) continue;
+          const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+          path.setAttribute('d',polygonPath(feature.geometry,project));
+          path.setAttribute('class','state-shape'); path.setAttribute('data-uf',uf); path.setAttribute('tabindex','0');
+          path.setAttribute('role','button'); path.setAttribute('aria-label',`${STATE_NAMES[uf]} (${uf})`);
+          const title = document.createElementNS('http://www.w3.org/2000/svg','title'); title.textContent=`${STATE_NAMES[uf]} (${uf}) · clique para ver os resultados`;
+          path.appendChild(title);
+          const select = () => selectState(uf);
+          path.addEventListener('click',select);
+          path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}});
+          svg.appendChild(path);
+        }
+        $('map-canvas').replaceChildren(svg);
+        renderStateChipList();
+      }
+      function updateMapStateColors() {
+        document.querySelectorAll('.state-shape').forEach(path => {
+          const uf=path.getAttribute('data-uf');
+          const winner=winnerFor(stateData[uf]);
+          path.classList.toggle('leader-lula',winner==='lula');
+          path.classList.toggle('leader-flavio',winner==='flavio');
+          path.classList.toggle('selected',uf===selectedUF);
+          path.setAttribute('aria-label',`${STATE_NAMES[uf]} (${uf})${winner==='lula'?' · Lula lidera':winner==='flavio'?' · Flávio Bolsonaro lidera':winner==='tie'?' · empate':' · sem parcial disponível'}`);
+        });
+        document.querySelectorAll('.state-chip').forEach(button => {
+          const uf=button.getAttribute('data-uf'); const winner=winnerFor(stateData[uf]);
+          button.classList.toggle('leader-lula',winner==='lula');
+          button.classList.toggle('leader-flavio',winner==='flavio');
+          button.classList.toggle('selected',uf===selectedUF);
+          button.title=`${STATE_NAMES[uf]}${winner==='lula'?' — Lula lidera':winner==='flavio'?' — Flávio lidera':''}`;
+        });
+      }
+      function updateMapSummary() {
+        let lula=0,flavio=0,tie=0,loaded=0;
+        for (const uf of STATE_UFS) {
+          const winner=winnerFor(stateData[uf]);
+          if (winner==='lula') lula++;
+          else if (winner==='flavio') flavio++;
+          else if (winner==='tie') tie++;
+          if (stateData[uf]) loaded++;
+        }
+        $('map-summary').innerHTML = `<span>Com parcial válida: ${loaded}/27 UFs</span><span style="color:var(--red)">Lula ${lula}</span><span style="color:var(--blue)">Flávio ${flavio}</span>${tie?`<span>Empates ${tie}</span>`:''}`;
+      }
+      function renderStateDetail(uf) {
+        selectedUF=uf;
+        updateMapStateColors();
+        const container=$('state-detail');
+        const data=stateData[uf];
+        if (!data) {
+          const error=stateErrors[uf];
+          container.innerHTML=`<div class="state-detail-placeholder"><strong>${STATE_NAMES[uf]} (${uf})</strong><span>${error ? 'Não foi possível consultar os dados oficiais deste estado.' : 'Consultando a parcial oficial deste estado…'}</span>${error?'<span>O resultado nacional continua disponível no painel principal; tente selecionar o estado novamente mais tarde.</span>':''}</div>`;
+          return;
+        }
+        const winner=winnerFor(data);
+        const leaderName=winner==='lula'?'Lula lidera a parcial estadual':winner==='flavio'?'Flávio Bolsonaro lidera a parcial estadual':winner==='tie'?'Empate na parcial estadual':'Ainda sem votos contabilizados';
+        const totalVotes=safe(data.lulaVotes)+safe(data.flavioVotes);
+        container.innerHTML=`<h3>${STATE_NAMES[uf]} (${uf})</h3>
+          <div class="state-detail-sub">Parcial TSE: ${data.date || 'data indisponível'} ${data.time || ''} · ${Number.isFinite(data.sectionsPct)?fmtPct(data.sectionsPct)+' das seções':''}</div>
+          <div class="state-leader"><span class="leader-chip" style="--chip:${winner==='lula'?'var(--red)':winner==='flavio'?'var(--blue)':'#526176'}">${winner==='lula'?'13':winner==='flavio'?'22':'—'}</span><span>${leaderName}</span></div>
+          <div class="state-candidate-row"><span class="state-cand-label" style="color:var(--red)">Lula · PT 13</span><span class="state-cand-count">${fmtInt(data.lulaVotes)} votos</span><span class="state-cand-pct">${fmtPct(data.lulaPct)} dos votos válidos</span></div>
+          <div class="state-candidate-row"><span class="state-cand-label" style="color:var(--blue)">Flávio Bolsonaro · PL 22</span><span class="state-cand-count">${fmtInt(data.flavioVotes)} votos</span><span class="state-cand-pct">${fmtPct(data.flavioPct)} dos votos válidos</span></div>
+          <div class="state-detail-sub">${fmtInt(data.sectionsCounted)} seções totalizadas · ${fmtInt(totalVotes)} votos somados dos dois candidatos</div>`;
+      }
+      async function selectState(uf) {
+        selectedUF=uf;
+        renderStateDetail(uf);
+        updateMapStateColors();
+        if (stateData[uf]) return;
+        try {
+          delete stateErrors[uf];
+          const response=await fetchPublicJSON(stateResultURL(uf),{cache:'no-store',headers:{'Accept':'application/json'}});
+          if(!response.ok) throw new Error(`HTTP ${response.status}`);
+          const json=await response.json();
+          const data=parseData(json);
+          if(!dataWasReleased(data)) throw new Error('Sem parcial liberada para esta UF');
+          stateData[uf]=data;
+        } catch(error) { stateErrors[uf]=error.message || 'Falha de consulta'; }
+        renderStateDetail(uf); updateMapStateColors(); updateMapSummary();
+      }
+      async function loadAllStateResults() {
+        if (stateRefreshInFlight || $('state-drawer').getAttribute('aria-hidden')==='true') return;
+        stateRefreshInFlight=true;
+        try {
+          $('map-status').textContent='Consultando resultados estaduais oficiais (pode levar alguns segundos)…';
+          let completed=0, available=0;
+          const concurrency=3;
+          for(let i=0;i<STATE_UFS.length;i+=concurrency) {
+            const batch=STATE_UFS.slice(i,i+concurrency);
+            await Promise.all(batch.map(async uf=>{
+              try {
+                const response=await fetchPublicJSON(stateResultURL(uf),{cache:'no-store',headers:{'Accept':'application/json'}});
+                if(!response.ok) throw new Error(`HTTP ${response.status}`);
+                const json=await response.json();
+                const data=parseData(json);
+                if(!dataWasReleased(data)) throw new Error('Sem parcial posterior ao início oficial');
+                stateData[uf]=data; delete stateErrors[uf]; available++;
+              } catch(error) { stateErrors[uf]=error.message || 'Falha de consulta'; }
+              completed++;
+            }));
+            $('map-status').textContent=`Consultando UFs… ${completed}/27 verificadas; ${available} com parcial válida.`;
+            updateMapStateColors(); updateMapSummary();
+          }
+          $('map-status').textContent=available ? `Consulta concluída. ${available} de 27 UFs com parcial válida. O mapa é atualizado enquanto esta aba lateral permanecer aberta.` : 'Nenhuma parcial estadual válida recebida. Confira o portal oficial do TSE; o mapa ficará neutro até haver dados.';
+          if(selectedUF) renderStateDetail(selectedUF);
+        } finally { stateRefreshInFlight=false; }
+      }
+      async function openStateDrawer() {
+        const drawer=$('state-drawer');
+        $('drawer-backdrop').hidden=false;
+        drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); drawer.inert=false;
+        $('open-map-button').setAttribute('aria-expanded','true');
+        try { await loadStateMap(); } catch(_) { /* mensagem já exibida no painel */ }
+        await loadAllStateResults();
+        if(stateRefreshTimer) clearInterval(stateRefreshTimer);
+        stateRefreshTimer=setInterval(()=>{if(!document.hidden)loadAllStateResults();},120000);
+        if(!selectedUF) $('close-map-button').focus();
+      }
+      function closeStateDrawer() {
+        const drawer=$('state-drawer');
+        drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); drawer.inert=true;
+        $('drawer-backdrop').hidden=true;
+        $('open-map-button').setAttribute('aria-expanded','false');
+        if(stateRefreshTimer) { clearInterval(stateRefreshTimer); stateRefreshTimer=null; }
+        $('open-map-button').focus();
+      }
+      async function toggleFullscreen() {
+        const enabled=!document.body.classList.contains('focus-mode');
+        if(enabled) {
+          document.body.classList.add('focus-mode');
+          $('fullscreen-button').textContent='⤢ Sair da tela cheia'; $('fullscreen-button').setAttribute('aria-pressed','true');
+          try { if(document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen(); }
+          catch(_) { /* fallback visual de telão continua ativo */ }
+        } else {
+          document.body.classList.remove('focus-mode');
+          $('fullscreen-button').textContent='⛶ Tela cheia'; $('fullscreen-button').setAttribute('aria-pressed','false');
+          try { if(document.fullscreenElement && document.exitFullscreen) await document.exitFullscreen(); } catch(_) {}
+        }
+      }
+
       function render(data) {
+        renderRanking(data);
         const totalCandidateVotes = safe(data.lulaVotes) + safe(data.flavioVotes);
         const validVotes = Number.isFinite(data.validVotes) ? data.validVotes : totalCandidateVotes;
         const difference = Math.abs(safe(data.lulaVotes) - safe(data.flavioVotes));
@@ -453,7 +895,7 @@
         requestInFlight = true;
         $('refresh-button').disabled = true;
         try {
-          const response = await fetch(OFFICIAL_URL, { cache: 'no-store', headers: { 'Accept': 'application/json' } });
+          const response = await fetchPublicJSON(OFFICIAL_URL, { cache: 'no-store', headers: { 'Accept': 'application/json' } });
           if (!response.ok) throw new Error(`O servidor oficial respondeu HTTP ${response.status}.`);
           const json = await response.json();
           const data = parseData(json);
@@ -479,12 +921,25 @@
       }
 
       $('refresh-button').addEventListener('click', refresh);
-      document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
+      $('open-map-button').addEventListener('click', openStateDrawer);
+      $('ranking-map-button').addEventListener('click', openStateDrawer);
+      $('close-map-button').addEventListener('click', closeStateDrawer);
+      $('drawer-backdrop').addEventListener('click', closeStateDrawer);
+      $('fullscreen-button').addEventListener('click', toggleFullscreen);
+      document.addEventListener('keydown', event => { if(event.key==='Escape' && $('state-drawer').classList.contains('open')) closeStateDrawer(); });
+      document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement && document.body.classList.contains('focus-mode')) {
+          document.body.classList.remove('focus-mode');
+          $('fullscreen-button').textContent='⛶ Tela cheia'; $('fullscreen-button').setAttribute('aria-pressed','false');
+        }
+      });
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) { refresh(); if($('state-drawer').getAttribute('aria-hidden')==='false') loadAllStateResults(); } });
       $('lula-photo').addEventListener('error', () => { $('lula-photo').style.display = 'none'; });
       $('flavio-photo').addEventListener('error', () => { $('flavio-photo').style.display = 'none'; });
       updateClock();
       setInterval(updateClock, 1000);
       showWaiting();
+      renderRanking(null);
       refresh();
       scheduleRefresh();
     })();
